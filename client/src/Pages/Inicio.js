@@ -26,8 +26,6 @@ function Inicio({ iphones, getIphones, getDolar, dolarBlue, admin }) {
     getIphonesFunction();
     getDolarFunction();
   }, []);
-  /* var dolarBLue = getDolarBlue();
-  console.log(dolarBLue); */
   return (
     <div className="flex relative">
       <NavBar admin={admin} />
