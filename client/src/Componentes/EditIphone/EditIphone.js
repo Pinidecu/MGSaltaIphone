@@ -25,7 +25,6 @@ import AddColor from "./components/AddColor";
 export default function EditIphone(props) {
   const { id } = props;
   const detalle = useSelector((state) => state.detalle);
-  const dolarBlue = useSelector((state) => state.dolarBlue);
   const colores = useSelector((state) => state.colores);
   const editIphoneAddColorVisible = useSelector(
     (state) => state.editIphoneAddColor

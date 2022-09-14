@@ -1,4 +1,6 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,500&display=swap");
+
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,6 +12,82 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+  * {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 992px) {
+  * {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  * {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  * {
+    font-size: 15px;
+  }
+}
+
+:root {
+  --font-primary: #ffffff;
+  --font-secondary: #181818dc;
+  --font-secondary-hover: #664ED8;
+  --primary: #CBD5E1;
+  --primary-hover: #4c5f2b;
+  --secondary: #3B82F6;
+  --secondary-hover: #2563EB;
+  --tertiary: #9CA3AF;
+  --tertiary-hover: #4B5563;
+  --quaternary: #444444dc;
+  --quaternary-hover: #181818dc;
+  --quinary: #b2b2b2;
+  --quinary-hover: #444444dc;
+  --disabled: #b2b2b2;
+  --background: #e8e8ed;
+  --deep-black: #000000;
+  --white: #ffffff;
+  --white-hover: #ececec;
+  --authorized: #34dc18;
+  --pending: #a1a1a1;
+  --cancelled: #ff0000;
+
+  --background-white: #eaeaea;
+  --background-darkest: #334155;
+  --background-dark: #8c8888;
+  --background-medium: #aeaeae;
+  --background-medium-light: #d9d9d9;
+  --background-light: #ededed;
+  --background-lightest: #fffdfd;
+  --gray: #ededed;
+  --font-white: #fffdfd;
+  --font-black: #444444;
+  --font-gray: #8c8888;
+  --border-gray: #8c8888;
+  --green-state: #009d23;
+  --red-state: #dc0000;
+  --background-gray: #d9d9d9;
+
+  --whatsapp: #25d366;
+  --whatsapp-hover: #44da7b;
 }
 
 @tailwind base;

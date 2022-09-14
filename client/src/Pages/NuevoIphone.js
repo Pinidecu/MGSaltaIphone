@@ -1,4 +1,4 @@
-import Carrousel from "../Componentes/Carrousel/Carrousel";
+import Carrousel from "../Componentes/CarrouselPortada/CarrouselPortada";
 import Footer from "../Componentes/Footer/Footer";
 import IphoneCard from "../Componentes/IphoneCard/IphoneCard";
 import NavBar from "../Componentes/NavBar/NavBar";

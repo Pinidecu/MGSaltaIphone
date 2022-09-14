@@ -5,17 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import Inicio from "./Pages/Inicio";
 import { store } from "./store/index";
 
-/* ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-); */
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
