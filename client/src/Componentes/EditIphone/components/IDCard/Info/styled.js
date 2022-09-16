@@ -32,11 +32,10 @@ export const ColorContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 50px;
-  column-gap: 10px;
 
   span {
     font-size: 1.2em;
+    margin-right: 1em;
   }
 `;
 
@@ -48,32 +47,6 @@ export const ColorButton = styled.button`
   height: 20px;
   background-color: ${(props) => props.color};
 `;
-
-export const BorrarButton = styled.button`
-  display: flex;
-  position: relative;
-  top: -8px;
-  right: -10px;
-  background-color: var(--cancelled);
-  width: 1em;
-  height: 1em;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-
-  :hover {
-    background-color: var(--cancelled-hover);
-  }
-  p {
-    color: var(--font-primary);
-    text-align: center;
-    font-size: 0.7em;
-    margin-bottom: 2px;
-    font-weight: 600;
-  }
-`;
-//flex relative top-[-10px] right-[-12px] bg-red-200 hover:bg-red-400
-// w-[1em] h-[1em] items-center justify-center rounded-full
 
 export const Button = styled.button`
   border-radius: 5px;
@@ -91,19 +64,5 @@ export const Button = styled.button`
         : "var(--tertiary-hover)"};
   }
 `;
-
-export const AddButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px; 
-`;
-
-export const PriceInput = styled.input`
-  border: 1px solid var(--border-gray);
-  border-radius: 10px;
-  width: 100%;
-  padding: 7px 10px;
-  color: var(--font-secondary);
-  background-color: ${(props) => props.color};
-`;
+//flex ml-auto text-white bg-gray-400 border-0 py-2 px-6
+//focus:outline-none hover:bg-gray-600 rounded

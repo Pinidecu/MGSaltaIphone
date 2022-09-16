@@ -6,7 +6,7 @@ export default function IphoneColors({ colors }) {
       {colors
         ? colors.map((color) => {
             return (
-              <ColorButton key={color.id} color={color.hexa}></ColorButton>
+              <ColorButton key={color.id} color={color?.hexa}></ColorButton>
             );
           })
         : null}

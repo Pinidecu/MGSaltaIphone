@@ -18,8 +18,8 @@ function Producto(props) {
   }, []);
   return (
     <div className="flex flex-col min-h-screen justify-between bg-slate-700">
-      <NavBar /> 
-      <IphoneDetails id={id} dolar={dolarBlue} />
+      <NavBar />
+      <IphoneDetails id={id} dolar={dolarBlue} admin={props.admin} />
       <Footer />
     </div>
   );

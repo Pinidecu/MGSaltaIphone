@@ -1,22 +1,25 @@
-import Carrousel from "../Componentes/CarrouselPortada/CarrouselPortada";
 import Footer from "../Componentes/Footer/Footer";
-import IphoneCard from "../Componentes/IphoneCard/IphoneCard";
 import NavBar from "../Componentes/NavBar/NavBar";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { changeAdmin, getDolar, getIphones } from "../store/Actions";
-import { useEffect } from "react";
-import NavAdmin from "../Componentes/Admin/NavAdmin";
-import Cargando from "../Componentes/Cargando/Cargando";
 import NuevoIphoneForm from "../Componentes/NuevoIphone/NuevoIphoneForm";
+import styled from "styled-components";
+
+const NuevoIphoneContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--background-gray);
+`;
 
 export function NuevoIphone() {
-  /* var dolarBLue = getDolarBlue();
-  console.log(dolarBLue); */
   return (
-    <div className="grid relative  min-h-screen">
+    <NuevoIphoneContainer>
       <NavBar admin={true} />
       <NuevoIphoneForm />
       <Footer />
-    </div>
+    </NuevoIphoneContainer>
   );
 }

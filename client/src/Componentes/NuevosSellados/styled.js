@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const NSContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 3em 0;
 `;
 
 export const Title = styled.h1`

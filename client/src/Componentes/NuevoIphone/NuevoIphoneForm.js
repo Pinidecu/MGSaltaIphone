@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import IphoneCard from "../IphoneCard/IphoneCard";
-import iphoneGenerico from "../../Imagenes/iphoneGenerico.webp";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { getColors, getIphones } from "../../store/Actions";
+import {
+  NIForm,
+  NIInput,
+  NPContainer,
+  NuevoIphoneContainer,
+  InputContainer,
+  ColorsContainer,
+  ACButton,
+  NewColorForm, 
+} from "./styled";
+import { PrimaryButton } from "../styledComponents";
 
 function NuevoIphoneForm({ getColors, colores }) {
   const push = useNavigate();
-  //const colores = useSelector((state) => state.colores);
-
   const dispatch = useDispatch();
 
   function getColorsFunction() {
@@ -37,7 +45,7 @@ function NuevoIphoneForm({ getColors, colores }) {
   });
 
   const [muestra, setMuestra] = useState([
-    "http://res.cloudinary.com/ezequieldecu26/image/upload/v1658495541/wpuvsfuabpmpu3tpjjxe.webp",
+    "https://res.cloudinary.com/ezequieldecu26/image/upload/v1663258868/wvknszofv5krvxyjzr5w.webp",
   ]);
 
   const handleColorChange = function (e) {
@@ -69,29 +77,6 @@ function NuevoIphoneForm({ getColors, colores }) {
     console.log(input);
   };
 
-  const subirImagenes = async function (e) {
-    let formdata = new FormData();
-    let pathImgs = [];
-    for (let index = 0; index < e.target.files.length; index++) {
-      let filename = Date.now() + "-" + e.target.files[index].name;
-      formdata.append("images", e.target.files[index], filename);
-      pathImgs.push(filename);
-    }
-    setInput({
-      ...input,
-      imagen: pathImgs,
-    });
-    console.log(input);
-    axios
-      .post(`http://localhost:3001/productos/loadFile`, formdata)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const subirImagenesCloudinary = function (e) {
     let urlsArray = [];
     for (let index = 0; index < e.target.files.length; index++) {
@@ -112,10 +97,10 @@ function NuevoIphoneForm({ getColors, colores }) {
       setInput({
         ...input,
         [e.target.name]: urlsArray,
-      });
+      }); /* 
       setTimeout(() => {
         setMuestra(urlsArray);
-      }, 1000);
+      }, 1000); */
     } else {
       setInput({
         ...input,
@@ -124,28 +109,6 @@ function NuevoIphoneForm({ getColors, colores }) {
     }
   };
 
-  const subirImagenesColor = async function (e) {
-    console.log(e.target.name);
-    /* let formdata = new FormData();
-    let pathImgs = [];
-    for (let index = 0; index < e.target.files.length; index++) {
-      let filename = Date.now() + "-" + e.target.files[index].name;
-      formdata.append("images", e.target.files[index], filename);
-      pathImgs.push(filename);
-    }
-    setInput({
-      ...input,
-      imageForColor: { ...input.imageForColor, [e.target.name]: pathImgs },
-    });
-    axios
-      .post(`http://localhost:3001/productos/loadFile`, formdata)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      }); */
-  };
   const crearIphone = async function (e) {
     e.preventDefault();
 
@@ -158,6 +121,7 @@ function NuevoIphoneForm({ getColors, colores }) {
       colorsNames: input.colores,
       imageForColor: input.imageForColor,
     };
+    console.log("obj: ", obj);
     axios.post(`http://localhost:3001/productos`, obj).then((response) => {
       console.log(response);
       alert("Iphone cargado exitosamente");
@@ -183,7 +147,7 @@ function NuevoIphoneForm({ getColors, colores }) {
   const colorsTags = colores.map((d) => (
     <div class="form-check">
       <input
-        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm   checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
         type="checkbox"
         id={d.name}
         key={d.id}
@@ -194,29 +158,19 @@ function NuevoIphoneForm({ getColors, colores }) {
       <label class="form-check-label inline-block text-gray-800" for={d.name}>
         {d.name}
       </label>
-      {/* 
-      <button
-        className={`border-2 border-gray-300 ml-1 bg-[${d.hexa}] rounded-full w-4 h-4 focus:outline-none`}
-      ></button> */}
     </div>
   ));
 
   return (
-    <form className="flex   my-10 place-self-center justify-center w-[80%]">
-      <form className="flex flex-col m-10 w-[50%] ">
-        <div className="grid gap-6 mb-6 lg:grid-cols-2">
+    <NuevoIphoneContainer>
+      <NIForm>
+        <NPContainer>
           <div>
-            <label
-              for="nombre"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Nombre
-            </label>
-            <input
+            <label for="nombre">Nombre</label>
+            <NIInput
               type="text"
               name="nombre"
               id="nombre"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="iPhone 13"
               required
               onChange={handleInputChange}
@@ -224,33 +178,21 @@ function NuevoIphoneForm({ getColors, colores }) {
             />
           </div>
           <div>
-            <label
-              for="precio"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Precio (U$D)
-            </label>
-            <input
+            <label for="precio">Precio (U$D)</label>
+            <NIInput
               type="text"
               id="price"
               name="price"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="1500"
               required
               onChange={handleInputChange}
               value={input.price}
             />
           </div>
-        </div>
-        <div className="mb-6">
-          <label
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            for="file_input"
-          >
-            Imagenes
-          </label>
-          <input
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        </NPContainer>
+        <InputContainer>
+          <label for="file_input">Imagenes</label>
+          <NIInput
             id="file_input"
             type="file"
             multiple
@@ -259,122 +201,80 @@ function NuevoIphoneForm({ getColors, colores }) {
             }}
             name="image"
           />
-        </div>
-        <div className="mb-6">
-          <label
-            for="descripción"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Descripción
-          </label>
-          <input
+        </InputContainer>
+        <InputContainer>
+          <label for="descripción">Descripción</label>
+          <NIInput
             type="text"
             id="descripcion"
             name="descripcion"
             placeholder="Descripción del producto"
-            className="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={handleInputChange}
             value={input.descripcion}
           />
-        </div>
-        <div className="mb-6">
-          <label
-            for="caracteristicas"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Caracteristicas
-          </label>
-          <input
+        </InputContainer>
+        <InputContainer>
+          <label for="caracteristicas">Caracteristicas</label>
+          <NIInput
             type="text"
             id="caracteristicas"
             name="caracteristicas"
             placeholder="Caracteristicas del producto"
-            className="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={handleInputChange}
             value={input.caracteristicas}
           />
-        </div>
-        <div className="mb-6">
-          <label
-            for="descripción"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Colores
-          </label>
-          <div class="grid grid-cols-4 justify-center">{colorsTags}</div>
-          <button
-            className="my-1 flex text-blue-700 mx-auto "
+        </InputContainer>
+        <InputContainer>
+          <label for="colores">Colores</label>
+          <ColorsContainer>{colorsTags}</ColorsContainer>
+          <ACButton
             onClick={() => {
               setColor({ ...color, visible: !color.visible });
             }}
           >
             Agregar color
-          </button>
-          <div
-            className={`bg-[#D3D6E7] rounded-md p-2 ${
-              color.visible ? null : "hidden"
-            }`}
-          >
-            <div className="mt-1">
-              <label
-                for="color"
-                className="block  text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Color
-              </label>
-              <input
+          </ACButton>
+          <NewColorForm visible={color.visible}>
+            <InputContainer>
+              <label for="color">Color</label>
+              <NIInput
                 type="text"
                 id="color"
                 name="color"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Rojo"
                 required
                 onChange={handleColorChange}
                 value={color.color}
               />
-            </div>
-            <div className="mt-1">
-              <label
-                for="hexa"
-                className="block  text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Codigo hexadecimal
-              </label>
-              <input
+            </InputContainer>
+            <InputContainer>
+              <label for="hexa">Codigo hexadecimal</label>
+              <NIInput
                 type="text"
                 id="hexa"
                 name="hexa"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="#000000"
                 required
                 onChange={handleColorChange}
                 value={color.hexa}
               />
-            </div>
-
-            <button
+            </InputContainer>
+            <PrimaryButton
               type="submit"
-              className="flex mx-auto mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               onClick={(e) => {
                 crearColor(e);
               }}
             >
               Crear color
-            </button>
-          </div>
-        </div>
+            </PrimaryButton>
+          </NewColorForm>
+        </InputContainer>
         {input.colores
           ? input.colores.map((color) => {
               return (
-                <div className="mb-6">
-                  <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    for="file_input"
-                  >
-                    Imagenes iPhone {color}
-                  </label>
-                  <input
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                <InputContainer>
+                  <label for="file_input">Imagenes iPhone {color}</label>
+                  <NIInput
                     id="file_input"
                     type="file"
                     multiple
@@ -383,22 +283,22 @@ function NuevoIphoneForm({ getColors, colores }) {
                     }}
                     name={color}
                   />
-                </div>
+                </InputContainer>
               );
             })
           : null}
 
-        <button
+        <PrimaryButton
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          full={true}
           onClick={(e) => {
             crearIphone(e);
           }}
         >
           Crear iPhone
-        </button>
-      </form>
-      <div className="m-10">
+        </PrimaryButton>
+      </NIForm>
+      <InputContainer>
         <IphoneCard
           name={input.nombre}
           price={input.price}
@@ -406,8 +306,8 @@ function NuevoIphoneForm({ getColors, colores }) {
           key={1}
           admin={false}
         />
-      </div>
-    </form>
+      </InputContainer>
+    </NuevoIphoneContainer>
   );
 }
 

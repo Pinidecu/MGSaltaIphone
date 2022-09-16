@@ -1,54 +1,111 @@
-import { useSelector } from "react-redux";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { editIphoneAddColor } from "../../../../store/Actions";
+import ConfirmEdit from "../../ConfirmEdit/ConfirmEdit";
+import EditButton from "../../EditButton/EditButton";
+import AddColor from "../../EditColors/AddColor/AddColor";
+import Description from "./Description/Description";
+import Name from "./Name/Name";
 import {
+  AddButton,
+  BorrarButton,
   Button,
   ColorButton,
   ColorContainer,
   InfoContainer,
+  PriceInput,
   SupContainer,
 } from "./styled";
 
-export default function Info({ detalle, setColor }) {
-  const dolarBlue = useSelector((state) => state.dolarBlue);
+export default function Info({ detalle, setColor, admin, functions }) {
   const colores = useSelector((state) => state.colores);
   let productColors;
   if (detalle.imageForColor) {
     productColors = Object.keys(detalle.imageForColor);
   }
-
+  const dispatch = useDispatch();
   return (
     <InfoContainer>
-      <h2>APPLE</h2>
-      <h1>{detalle.name}</h1>
-      <p>{detalle.description}</p>
+      <Name detalle={detalle} admin={admin} functions={functions} />
+      <Description detalle={detalle} admin={admin} functions={functions} />
       <SupContainer>
         <ColorContainer>
           <span>Colores</span>
           {productColors
-            ? productColors.map((color) => { 
+            ? productColors.map((color) => {
                 let colorObj = colores.filter((c) => c.name === color)[0];
                 return (
                   <ColorButton
                     key={color}
-                    color={colorObj.hexa}
-                    onClick={() => {
-                      setColor(color);
-                    }}
-                  ></ColorButton>
+                    color={colorObj?.hexa ? colorObj.hexa : null}
+                    onClick={
+                      admin
+                        ? null
+                        : () => {
+                            setColor(color);
+                          }
+                    }
+                  >
+                    {admin ? (
+                      <BorrarButton
+                        onClick={() => functions.borrarColor(color)}
+                      >
+                        <p>x</p>
+                      </BorrarButton>
+                    ) : null}
+                  </ColorButton>
                 );
               })
             : null}
+          {admin ? (
+            <AddButton
+              onClick={() => {
+                dispatch(editIphoneAddColor(true));
+              }}
+            >
+              <PlusCircleOutlined style={{ fontSize: 22 }} />
+            </AddButton>
+          ) : null}
+          <AddColor id={detalle.id} detalle={detalle} />
         </ColorContainer>
         <Button>Caracteristicas</Button>
       </SupContainer>
-      <ColorContainer>
-        <span>
-          USD {detalle.price}
-          {dolarBlue !== 0
-            ? `- $${new Intl.NumberFormat().format(detalle.price * dolarBlue)}`
-            : "cargando"}
-        </span>
-        <Button color="secondary">Comprar</Button>
-      </ColorContainer>
+      {functions.editInput.price ? (
+        <ColorContainer>
+          <PriceInput
+            type="number"
+            name="price"
+            id="price"
+            placeholder={functions.input.price}
+            required
+            value={functions.input.price}
+            onChange={functions.handleInputChange}
+          />
+          <ConfirmEdit
+            name="price"
+            functions={functions}
+            input={functions.input}
+            setInput={functions.setInput}
+            editInput={functions.editInput}
+            setEditInput={functions.setEditInput}
+            edit={functions.edit}
+            detalle={detalle}
+          />
+        </ColorContainer>
+      ) : (
+        <ColorContainer>
+          <span>{detalle.price} USD </span>
+          {admin ? (
+            <EditButton
+              name="price"
+              editInput={functions.editInput}
+              setEditInput={functions.setEditInput}
+            />
+          ) : (
+            <Button color="secondary">Comprar</Button>
+          )}
+        </ColorContainer>
+      )}
     </InfoContainer>
   );
 }

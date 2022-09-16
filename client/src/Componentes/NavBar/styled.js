@@ -12,6 +12,7 @@ export const NavContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 70px;
+  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
 `;
 
 export const Logo = styled.a`

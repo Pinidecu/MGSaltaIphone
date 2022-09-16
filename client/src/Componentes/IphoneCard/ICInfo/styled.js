@@ -6,7 +6,7 @@ export const ICInfoContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 1em;
+  padding: 1em; 
 
   h1 {
     font-size: 1em;

@@ -10,6 +10,7 @@ export const FooterContainer = styled.div`
   justify-content: space-between;
   padding: 25px;
   height: 70px;
+  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
   span {
     color: var(--font-secondary);
 

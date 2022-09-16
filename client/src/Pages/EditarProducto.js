@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Carrousel from "../Componentes/CarrouselPortada/CarrouselPortada";
 import EditIphone from "../Componentes/EditIphone/EditIphone";
 import Footer from "../Componentes/Footer/Footer";
+import IphoneDetailsEdit from "../Componentes/IphoneDetails/IphoneDetailsEdit";
 import NavBar from "../Componentes/NavBar/NavBar";
 import { getDolar } from "../store/Actions";
 
@@ -17,10 +17,13 @@ function EditarProducto(props) {
   useEffect(() => {
     getDolarFunction();
   }, []);
+
   return (
     <div className="flex flex-col min-h-screen justify-between bg-slate-700">
-      <NavBar /> 
-      <EditIphone id={id} dolar={dolarBlue} />
+      <NavBar />
+
+      <EditIphone id={id} dolar={dolarBlue} admin ={props.admin}/>
+      {/* <IphoneDetailsEdit id={id}   edit={true}/> */}
       <Footer />
     </div>
   );

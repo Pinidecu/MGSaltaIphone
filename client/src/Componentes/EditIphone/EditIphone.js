@@ -11,8 +11,6 @@ import {
   getDolar,
 } from "../../store/Actions";
 import {
-  CaretDownOutlined,
-  CaretUpOutlined,
   CheckOutlined,
   CloseOutlined,
   DeleteOutlined,
@@ -21,6 +19,9 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import AddColor from "./components/AddColor";
+import Features from "./components/Features/Features";
+import { IDContainer } from "./styled";
+import IDCard from "./components/IDCard/IDCard";
 
 export default function EditIphone(props) {
   const { id } = props;
@@ -208,340 +209,223 @@ export default function EditIphone(props) {
   const [color, setColor] = useState();
   let [more, setMore] = useState(false);
   return (
-    <section className="text-gray-700 body-font overflow-hidden   ">
-      <div className="container px-5 pt-24 mx-auto flex flex-col justify-center  items-center">
-        <div className="lg:w-4/5 mx-auto flex  justify-center">
-          <div className="relative flex w-[500px] h-[500px] justify-center items-center bg-white border border-gray-200 rounded-md overflow-hidden">
-            {editInput.image ? (
-              <div
-                className={`absolute top-0 w-full h-full overflow-clip z-10 flex items-center justify-center `}
-              >
-                <div className="absolute top-0 right-0 w-screen h-full bg-black opacity-90"></div>
-                <div className="absolute -bottom-2 right-3.5  mr-0.5 flex  h-[50px] w-[50px] ">
-                  <button
-                    className="border hover:bg-green-400 rounded p-1 m-1 flex items-center h-[2em] bg-green-300"
-                    id="name"
-                    onClick={(e) => {
-                      guardarcambios(e);
-                    }}
-                  >
-                    <CheckOutlined
-                      style={{ fontSize: "15px", color: "white" }}
-                    />
-                  </button>
-                  <button
-                    className="border hover:bg-red-400 rounded p-1 m-1  flex items-center h-[2em] bg-red-300"
-                    onClick={() => {
-                      setEditInput({ ...editInput, image: false });
-                      setInput({ ...input, image: detalle.image });
-                      setImage({ borrar: [], nuevas: [] });
-                    }}
-                  >
-                    <CloseOutlined
-                      style={{ fontSize: "15px", color: "white" }}
-                    />
-                  </button>
-                </div>
-                <div className="w-[80%] z-20">
-                  <div className="block mb-2 text-sm font-medium text-white dark:text-gray-300">
-                    <p>Imagenes cargadas</p>
-                    <div className=" flex flex-wrap my-2 self-center gap-2 items-center justify-center">
-                      {detalle.image
-                        ? detalle.image.map((i) => {
-                            return (
-                              <div
-                                className="h-[100px] rounded-sm relative bg-white"
-                                key={detalle.id}
-                              >
-                                <div
-                                  className={`${
-                                    image.borrar.includes(i) ? null : "hidden"
-                                  } absolute top-0 right-0 w-full h-full bg-slate-500 opacity-90 flex items-center justify-center`}
-                                >
-                                  <DeleteOutlined
-                                    style={{ fontSize: "35px", color: "white" }}
-                                  />
-                                  <button
-                                    className="absolute self-end hover:visible"
-                                    onClick={() => cancelarBorrado(i)}
-                                  >
-                                    <CloseOutlined
-                                      style={{
-                                        fontSize: "15px",
-                                        color: "white",
-                                      }}
-                                    />
-                                  </button>
-                                </div>
-                                <button
-                                  className={`flex absolute top-1 right-1 bg-red-200 hover:bg-red-400  w-[1em] h-[1em] items-center justify-center rounded-full ${
-                                    image.borrar.includes(i) ? "hidden" : null
-                                  }`}
-                                  onClick={() => borrarImagen(i)}
-                                >
-                                  <p className="text-white text-xs text-center mb-1 font-bold">
-                                    x
-                                  </p>
-                                </button>
-                                <Image
-                                  cloudName="ezequieldecu26"
-                                  publicId={i}
-                                  width="100px"
-                                  height="100px"
-                                  className=" h-full object-contain object-center"
-                                  alt="iphone"
-                                />
-                              </div>
-                            );
-                          })
-                        : null}
-
-                      {detalle.image.length === 0 ? (
-                        <p className="text-xs text-slate-400">
-                          No hay imagenes
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                  <label
-                    className="block mb-2 text-sm font-medium text-white dark:text-gray-300"
-                    for="file_input"
-                  >
-                    Agregar imagen
-                  </label>
-                  <input
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    id="file_input"
-                    type="file"
-                    multiple
-                    onChange={(e) => {
-                      subirImagenes(e);
-                    }}
-                    name="image"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="absolute bottom-0 right-0 flex flex-row justify-between items-center">
+    <IDContainer>
+      <div className="lg:w-4/5 mx-auto flex  justify-center">
+        <div className="relative flex w-[500px] h-[500px] justify-center items-center bg-white border border-gray-200 rounded-md overflow-hidden">
+          {editInput.image ? (
+            <div
+              className={`absolute top-0 w-full h-full overflow-clip z-10 flex items-center justify-center `}
+            >
+              <div className="absolute top-0 right-0 w-screen h-full bg-black opacity-90"></div>
+              <div className="absolute -bottom-2 right-3.5  mr-0.5 flex  h-[50px] w-[50px] ">
                 <button
-                  className="border hover:bg-slate-400 rounded p-1 m-1"
-                  onClick={() => setEditInput({ ...editInput, image: true })}
+                  className="border hover:bg-green-400 rounded p-1 m-1 flex items-center h-[2em] bg-green-300"
+                  id="name"
+                  onClick={(e) => {
+                    guardarcambios(e);
+                  }}
                 >
-                  <EditOutlined style={{ fontSize: "20px", color: "black" }} />
+                  <CheckOutlined style={{ fontSize: "15px", color: "white" }} />
+                </button>
+                <button
+                  className="border hover:bg-red-400 rounded p-1 m-1  flex items-center h-[2em] bg-red-300"
+                  onClick={() => {
+                    setEditInput({ ...editInput, image: false });
+                    setInput({ ...input, image: detalle.image });
+                    setImage({ borrar: [], nuevas: [] });
+                  }}
+                >
+                  <CloseOutlined style={{ fontSize: "15px", color: "white" }} />
                 </button>
               </div>
-            )}
-            <Carousel infiniteLoop showThumbs={false}>
-              {detalle.imageForColor && color
-                ? detalle.imageForColor[color].map((image) => {
-                    return (
-                      <div className="h-[358px]" key={detalle.id}>
-                        <Image
-                          cloudName="ezequieldecu26"
-                          publicId={image}
-                          width="100%"
-                          height="400px"
-                          className=" h-full object-contain object-center"
-                          alt="iphone"
-                        />
-                      </div>
-                    );
-                  })
-                : detalle.image?.map((image) => {
-                    return (
-                      <div className="h-[358px]" key={detalle.id}>
-                        <Image
-                          cloudName="ezequieldecu26"
-                          publicId={image}
-                          width="100%"
-                          height="400px"
-                          className=" h-full  object-contain object-center "
-                          alt="iphone"
-                        />
-                      </div>
-                    );
-                  })}
-            </Carousel>
-          </div>
-          <div className="lg:w-1/2 w-full lg:pl-10 mt-6 lg:mt-0 flex flex-col  ">
-            <div>
-              <h2 className="text-sm title-font text-gray-500 tracking-widest">
-                APPLE
-              </h2>
-
-              {editInput.name ? (
-                <div className="flex flex-row items-center">
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder={input.name}
-                    required
-                    value={input.name}
-                    onChange={handleInputChange}
-                  />
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    id="name"
-                    onClick={(e) => {
-                      setEditInput({ ...editInput, name: false });
-                      edit(e, "name");
-                    }}
-                  >
-                    <CheckOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    onClick={() => {
-                      setEditInput({ ...editInput, name: false });
-                      setInput({ ...input, name: detalle.name });
-                    }}
-                  >
-                    <CloseOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-row justify-between items-center">
-                  <h1 className="text-white text-3xl title-font font-medium mb-1 ">
-                    {detalle.name}
-                  </h1>
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    onClick={() => setEditInput({ ...editInput, name: true })}
-                  >
-                    <EditOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                </div>
-              )}
-              {editInput.description ? (
-                <div className="flex flex-col items-center my-5">
-                  <textarea
-                    type="text"
-                    id="description"
-                    name="description"
-                    placeholder="Descripción del producto"
-                    className="block p-4 w-full h-[10em] text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
-                    value={input.description}
-                    onChange={handleInputChange}
-                  />
-                  <div className="flex flex-row items-center self-end">
-                    <button
-                      className="border hover:bg-slate-400 rounded p-1 m-1"
-                      id="description"
-                      onClick={(e) => {
-                        setEditInput({ ...editInput, description: false });
-                        edit(e, "description");
-                      }}
-                    >
-                      <CheckOutlined
-                        style={{ fontSize: "20px", color: "white" }}
-                      />
-                    </button>
-                    <button
-                      className="border hover:bg-slate-400 rounded p-1 m-1"
-                      onClick={() => {
-                        setEditInput({ ...editInput, description: false });
-                        setInput({
-                          ...input,
-                          description: detalle.description,
-                        });
-                      }}
-                    >
-                      <CloseOutlined
-                        style={{ fontSize: "20px", color: "white" }}
-                      />
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex flex-col justify-between  ">
-                  <p className="text-white leading-relaxed mt-5 text-justify">
-                    {detalle.description}
-                  </p>
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1 self-end"
-                    onClick={() =>
-                      setEditInput({ ...editInput, description: true })
-                    }
-                  >
-                    <EditOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                </div>
-              )}
-            </div>
-            <div>
-              <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
-                <div className="flex">
-                  <span className="text-white mr-3">Color</span>
-                  <div className="flex gap-1">
-                    {productColors
-                      ? productColors.map((color) => {
-                          let colorObj = colores.filter(
-                            (c) => c.name === color
-                          )[0];
+              <div className="w-[80%] z-20">
+                <div className="block mb-2 text-sm font-medium text-white dark:text-gray-300">
+                  <p>Imagenes cargadas</p>
+                  <div className=" flex flex-wrap my-2 self-center gap-2 items-center justify-center">
+                    {detalle.image
+                      ? detalle.image.map((i) => {
                           return (
                             <div
-                              key={color}
-                              className={`border-2 border-gray-300 ml-1   ${
-                                colorObj ? `bg-[${colorObj.hexa}]` : "bg-black"
-                              } rounded-full w-6 h-6 focus:outline-none`}
+                              className="h-[100px] rounded-sm relative bg-white"
+                              key={detalle.id}
                             >
+                              <div
+                                className={`${
+                                  image.borrar.includes(i) ? null : "hidden"
+                                } absolute top-0 right-0 w-full h-full bg-slate-500 opacity-90 flex items-center justify-center`}
+                              >
+                                <DeleteOutlined
+                                  style={{ fontSize: "35px", color: "white" }}
+                                />
+                                <button
+                                  className="absolute self-end hover:visible"
+                                  onClick={() => cancelarBorrado(i)}
+                                >
+                                  <CloseOutlined
+                                    style={{
+                                      fontSize: "15px",
+                                      color: "white",
+                                    }}
+                                  />
+                                </button>
+                              </div>
                               <button
-                                className="flex relative top-[-10px] right-[-12px] bg-red-200 hover:bg-red-400  w-[1em] h-[1em] items-center justify-center rounded-full"
-                                onClick={() => borrarColor(color)}
+                                className={`flex absolute top-1 right-1 bg-red-200 hover:bg-red-400  w-[1em] h-[1em] items-center justify-center rounded-full ${
+                                  image.borrar.includes(i) ? "hidden" : null
+                                }`}
+                                onClick={() => borrarImagen(i)}
                               >
                                 <p className="text-white text-xs text-center mb-1 font-bold">
                                   x
                                 </p>
                               </button>
+                              <Image
+                                cloudName="ezequieldecu26"
+                                publicId={i}
+                                width="100px"
+                                height="100px"
+                                className=" h-full object-contain object-center"
+                                alt="iphone"
+                              />
                             </div>
                           );
                         })
                       : null}
-                    <button
-                      className="mx-3 flex items-center"
-                      onClick={() => {
-                        dispatch(editIphoneAddColor(true));
-                      }}
-                    >
-                      <PlusCircleOutlined
-                        style={{ fontSize: "25px", color: "white" }}
-                      />
-                    </button>
-                    <AddColor id={id} detalle={detalle} />
+
+                    {detalle.image.length === 0 ? (
+                      <p className="text-xs text-slate-400">No hay imagenes</p>
+                    ) : null}
                   </div>
                 </div>
-                <button className="flex ml-auto text-white bg-gray-400 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded">
-                  Caracteristicas
+                <label
+                  className="block mb-2 text-sm font-medium text-white dark:text-gray-300"
+                  for="file_input"
+                >
+                  Agregar imagen
+                </label>
+                <input
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  id="file_input"
+                  type="file"
+                  multiple
+                  onChange={(e) => {
+                    subirImagenes(e);
+                  }}
+                  name="image"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="absolute bottom-0 right-0 flex flex-row justify-between items-center">
+              <button
+                className="border hover:bg-slate-400 rounded p-1 m-1"
+                onClick={() => setEditInput({ ...editInput, image: true })}
+              >
+                <EditOutlined style={{ fontSize: "20px", color: "black" }} />
+              </button>
+            </div>
+          )}
+          <Carousel infiniteLoop showThumbs={false}>
+            {detalle.imageForColor && color
+              ? detalle.imageForColor[color].map((image) => {
+                  return (
+                    <div className="h-[358px]" key={detalle.id}>
+                      <Image
+                        cloudName="ezequieldecu26"
+                        publicId={image}
+                        width="100%"
+                        height="400px"
+                        className=" h-full object-contain object-center"
+                        alt="iphone"
+                      />
+                    </div>
+                  );
+                })
+              : detalle.image?.map((image) => {
+                  return (
+                    <div className="h-[358px]" key={detalle.id}>
+                      <Image
+                        cloudName="ezequieldecu26"
+                        publicId={image}
+                        width="100%"
+                        height="400px"
+                        className=" h-full  object-contain object-center "
+                        alt="iphone"
+                      />
+                    </div>
+                  );
+                })}
+          </Carousel>
+        </div>
+        <div className="lg:w-1/2 w-full lg:pl-10 mt-6 lg:mt-0 flex flex-col  ">
+          <div>
+            <h2 className="text-sm title-font text-gray-500 tracking-widest">
+              APPLE
+            </h2>
+
+            {editInput.name ? (
+              <div className="flex flex-row items-center">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder={input.name}
+                  required
+                  value={input.name}
+                  onChange={handleInputChange}
+                />
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  id="name"
+                  onClick={(e) => {
+                    setEditInput({ ...editInput, name: false });
+                    edit(e, "name");
+                  }}
+                >
+                  <CheckOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  onClick={() => {
+                    setEditInput({ ...editInput, name: false });
+                    setInput({ ...input, name: detalle.name });
+                  }}
+                >
+                  <CloseOutlined style={{ fontSize: "20px", color: "white" }} />
                 </button>
               </div>
-              {editInput.price ? (
-                <div className="flex flex-row items-center">
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder={input.price}
-                    required
-                    value={input.price}
-                    onChange={handleInputChange}
-                  />
+            ) : (
+              <div className="flex flex-row justify-between items-center">
+                <h1 className="text-white text-3xl title-font font-medium mb-1 ">
+                  {detalle.name}
+                </h1>
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  onClick={() => setEditInput({ ...editInput, name: true })}
+                >
+                  <EditOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+              </div>
+            )}
+            {editInput.description ? (
+              <div className="flex flex-col items-center my-5">
+                <textarea
+                  type="text"
+                  id="description"
+                  name="description"
+                  placeholder="Descripción del producto"
+                  className="block p-4 w-full h-[10em] text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
+                  value={input.description}
+                  onChange={handleInputChange}
+                />
+                <div className="flex flex-row items-center self-end">
                   <button
                     className="border hover:bg-slate-400 rounded p-1 m-1"
-                    id="name"
+                    id="description"
                     onClick={(e) => {
-                      setEditInput({ ...editInput, price: false });
-                      edit(e, "price");
+                      setEditInput({ ...editInput, description: false });
+                      edit(e, "description");
                     }}
                   >
                     <CheckOutlined
@@ -551,8 +435,11 @@ export default function EditIphone(props) {
                   <button
                     className="border hover:bg-slate-400 rounded p-1 m-1"
                     onClick={() => {
-                      setEditInput({ ...editInput, price: false });
-                      setInput({ ...input, price: detalle.price });
+                      setEditInput({ ...editInput, description: false });
+                      setInput({
+                        ...input,
+                        description: detalle.description,
+                      });
                     }}
                   >
                     <CloseOutlined
@@ -560,91 +447,131 @@ export default function EditIphone(props) {
                     />
                   </button>
                 </div>
-              ) : (
-                <div className="flex items-center justify-between">
-                  <span className="title-font font-medium text-2xl text-white ">
-                    USD {detalle.price}
-                  </span>
+              </div>
+            ) : (
+              <div className="flex flex-col justify-between  ">
+                <p className="text-white leading-relaxed mt-5 text-justify">
+                  {detalle.description}
+                </p>
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1 self-end"
+                  onClick={() =>
+                    setEditInput({ ...editInput, description: true })
+                  }
+                >
+                  <EditOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+              </div>
+            )}
+          </div>
+          <div>
+            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
+              <div className="flex">
+                <span className="text-white mr-3">Color</span>
+                <div className="flex gap-1">
+                  {productColors
+                    ? productColors.map((color) => {
+                        let colorObj = colores.filter(
+                          (c) => c.name === color
+                        )[0];
+                        return (
+                          <div
+                            key={color}
+                            className={`border-2 border-gray-300 ml-1   ${
+                              colorObj ? `bg-[${colorObj.hexa}]` : "bg-black"
+                            } rounded-full w-6 h-6 focus:outline-none`}
+                          >
+                            <button
+                              className="flex relative top-[-10px] right-[-12px] bg-red-200 hover:bg-red-400  w-[1em] h-[1em] items-center justify-center rounded-full"
+                              onClick={() => borrarColor(color)}
+                            >
+                              <p className="text-white text-xs text-center mb-1 font-bold">
+                                x
+                              </p>
+                            </button>
+                          </div>
+                        );
+                      })
+                    : null}
                   <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    onClick={() => setEditInput({ ...editInput, price: true })}
+                    className="mx-3 flex items-center"
+                    onClick={() => {
+                      dispatch(editIphoneAddColor(true));
+                    }}
                   >
-                    <EditOutlined
-                      style={{ fontSize: "20px", color: "white" }}
+                    <PlusCircleOutlined
+                      style={{ fontSize: "25px", color: "white" }}
                     />
                   </button>
+                  <AddColor id={id} detalle={detalle} />
                 </div>
-              )}
+              </div>
+              <button className="flex ml-auto text-white bg-gray-400 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded">
+                Caracteristicas
+              </button>
             </div>
+            {editInput.price ? (
+              <div className="flex flex-row items-center">
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  className="bg-gray-50 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder={input.price}
+                  required
+                  value={input.price}
+                  onChange={handleInputChange}
+                />
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  id="name"
+                  onClick={(e) => {
+                    setEditInput({ ...editInput, price: false });
+                    edit(e, "price");
+                  }}
+                >
+                  <CheckOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  onClick={() => {
+                    setEditInput({ ...editInput, price: false });
+                    setInput({ ...input, price: detalle.price });
+                  }}
+                >
+                  <CloseOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between">
+                <span className="title-font font-medium text-2xl text-white ">
+                  USD {detalle.price}
+                </span>
+                <button
+                  className="border hover:bg-slate-400 rounded p-1 m-1"
+                  onClick={() => setEditInput({ ...editInput, price: true })}
+                >
+                  <EditOutlined style={{ fontSize: "20px", color: "white" }} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {detalle.features ? (
-          <div className="lg:w-4/5 my-10 px-12 flex flex-col justify-center items-center">
-            <button
-              className=" flex flex-row gap-2 text-white items-center"
-              onClick={() => setMore(!more)}
-            >
-              <p className=" text-white">Ver Caracteristiscas</p>
-              {more ? <CaretUpOutlined size={50} /> : <CaretDownOutlined />}
-            </button>
-            {more ? (
-              editInput.features ? (
-                <div className="flex flex-row items-center">
-                  <textarea
-                    type="text"
-                    name="features"
-                    id="features"
-                    className="block p-4 w-[40em] h-[10em] mt-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 "
-                    placeholder={input.features}
-                    required
-                    value={input.features}
-                    onChange={handleInputChange}
-                  />
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    id="name"
-                    onClick={(e) => {
-                      setEditInput({ ...editInput, features: false });
-                      edit(e, "features");
-                    }}
-                  >
-                    <CheckOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    onClick={() => {
-                      setEditInput({ ...editInput, features: false });
-                      setInput({ ...input, features: detalle.features });
-                    }}
-                  >
-                    <CloseOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-row justify-between items-center">
-                  <p className="text-white mt-5 text-justify">
-                    {detalle.features}
-                  </p>
-                  <button
-                    className="border hover:bg-slate-400 rounded p-1 m-1"
-                    onClick={() =>
-                      setEditInput({ ...editInput, features: true })
-                    }
-                  >
-                    <EditOutlined
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                  </button>
-                </div>
-              )
-            ) : null}
-          </div>
-        ) : null}
       </div>
-    </section>
+      {detalle.features ? (
+        <Features
+          more={more}
+          setMore={setMore}
+          input={input}
+          setInput={setInput}
+          edit={edit}
+          detalle={detalle}
+          editInput={editInput}
+          handleInputChange={handleInputChange}
+          setEditInput={setEditInput}
+          admin={props.admin}
+        />
+      ) : null}
+    </IDContainer>
   );
 }
