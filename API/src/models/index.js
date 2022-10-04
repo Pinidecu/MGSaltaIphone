@@ -24,6 +24,8 @@ const Colors = ColorsFactory(sequelize);
 //Relaciones
 Product.belongsToMany(Colors, { through: "ProductColor" });
 Colors.belongsToMany(Product, { through: "ProductColor" });
+Usedphone.belongsToMany(Colors, { through: "UsedphoneColor" });
+Colors.belongsToMany(Usedphone, { through: "UsedphoneColor" });
 
 module.exports = {
   conn: sequelize,

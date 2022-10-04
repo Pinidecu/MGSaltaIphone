@@ -13,12 +13,16 @@ module.exports = function (sequelize) {
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: [],
     },
     batery: {
       type: DataTypes.INTEGER,
+      validate: { min: 0, max: 100 },
     },
     obs: {
       type: DataTypes.STRING,

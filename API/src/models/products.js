@@ -13,6 +13,7 @@ module.exports = function (sequelize) {
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     image: {
       type: DataTypes.ARRAY(DataTypes.STRING),
