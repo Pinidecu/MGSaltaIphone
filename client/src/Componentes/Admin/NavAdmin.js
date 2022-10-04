@@ -8,10 +8,10 @@ export default function NavAdmin({ admin }) {
         <Link to="/nuevoiphone">Nuevo iPhone</Link>
       </NavLink>
       <NavLink to="/nuevoiphone">
-        <Link to="/nuevoiphone">Nuevo iPhone Usado</Link>
+        <Link to="/nuevoiphoneusado">Nuevo iPhone Usado</Link>
       </NavLink>
       <NavLink to="/nuevoiphone">
-        <Link to="/nuevoiphone">Nuevo Accesorio</Link>
+        <Link to="/nuevoaccesorio">Nuevo Accesorio</Link>
       </NavLink>
     </NavAdminContainer>
   );

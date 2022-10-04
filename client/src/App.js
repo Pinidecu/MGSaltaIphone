@@ -36,6 +36,7 @@ function App() {
         }
       />
       <Route exact path="/nuevoiphone" element={<NuevoIphone />} />
+      <Route exact path="/nuevoiphoneusado" element={<NuevoIphone usado={true} />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
