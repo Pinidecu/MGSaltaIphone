@@ -35,7 +35,6 @@ router.get("/:id", productController.getById);
 /* router.post("/", productController.add);
  */
 router.post("/loadFile", fileUpload, (req, res, next) => {
-  console.log("aaaaaaaaaaaaaaa: ", req.body.filename);
   res.send({ data: "Archivo cargado" });
   const files = req.files;
   if (!files) {
@@ -47,6 +46,8 @@ router.post("/loadFile", fileUpload, (req, res, next) => {
 
   res.send(files);
 });
+
+
 router.post("/", async function (req, res) {
   try {
     const {
