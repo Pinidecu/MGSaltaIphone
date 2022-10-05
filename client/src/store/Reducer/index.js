@@ -1,6 +1,7 @@
 import {
   GET_IPHONES,
   GET_IPHONES_USADOS,
+  GET_ACCESORIOS,
   GET_DOLAR,
   CHANGE_ADMIN,
   GET_DETALLE,
@@ -13,6 +14,7 @@ import {
 const initialState = {
   iphones: [],
   iphonesUsados: [],
+  accesorios: [],
   dolarBlue: 0,
   admin: false,
   detalle: {},
@@ -32,6 +34,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         iphonesUsados: action.payload,
+      };
+      case GET_ACCESORIOS:
+      return {
+        ...state,
+        accesorios: action.payload,
       };
     case GET_DOLAR:
       return {
