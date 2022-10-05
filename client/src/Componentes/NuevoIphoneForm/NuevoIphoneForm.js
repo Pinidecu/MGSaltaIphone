@@ -97,10 +97,7 @@ function NuevoIphoneForm({ getColors, colores }) {
       setInput({
         ...input,
         [e.target.name]: urlsArray,
-      }); /* 
-      setTimeout(() => {
-        setMuestra(urlsArray);
-      }, 1000); */
+      });
     } else {
       setInput({
         ...input,

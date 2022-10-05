@@ -1,21 +1,8 @@
 const { Router } = require("express");
-const multer = require("multer");
-const path = require("path");
 const router = Router();
 const productController = require("../controllers/products");
 const { Colors, Product } = require("../models");
 const { v4: uuidv4 } = require("uuid");
-
-const diskStorage = multer.diskStorage({
-  destination: path.join(__dirname, "../../../client/src/Imagenes"),
-  filename: (req, file, cb) => {
-    cb(null, `${file.originalname}`);
-  },
-});
-
-const fileUpload = multer({
-  storage: diskStorage,
-}).array("images", 12);
 
 /* router.get("/", productController.getAll);
  */
@@ -34,19 +21,6 @@ router.get("/:id", productController.getById);
 
 /* router.post("/", productController.add);
  */
-router.post("/loadFile", fileUpload, (req, res, next) => {
-  res.send({ data: "Archivo cargado" });
-  const files = req.files;
-  if (!files) {
-    const error = new Error("Please choose files");
-    /*  error.httpStatusCode = 400;
-    return next(error); */
-    console.log("Error: ", error);
-  }
-
-  res.send(files);
-});
-
 
 router.post("/", async function (req, res) {
   try {
@@ -59,6 +33,7 @@ router.post("/", async function (req, res) {
       features,
       colorsNames,
     } = req.body;
+    console.log("image", image);
     var newIphone = await Product.create({
       name,
       price,
@@ -113,7 +88,7 @@ router.put("/agregarcolores/:id", async function (req, res) {
     const colores = req.body.colores;
     const body = req.body;
     console.log("Colores: ", colores);
-    console.log('Body: ', body)
+    console.log("Body: ", body);
     var newIphone = await Product.update(body, {
       where: {
         id,
