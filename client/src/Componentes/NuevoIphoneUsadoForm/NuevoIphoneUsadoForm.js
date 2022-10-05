@@ -3,7 +3,7 @@ import IphoneCard from "../IphoneCard/IphoneCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { getColors, getIphones } from "../../store/Actions";
+import { getColors, getIphonesUsados } from "../../store/Actions";
 import {
   NIForm,
   NIInput,
@@ -112,7 +112,7 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
     axios.post(`http://localhost:3001/usados`, obj).then((response) => {
       console.log(response);
       alert("Iphone usado cargado exitosamente");
-      dispatch(getIphones());
+      dispatch(getIphonesUsados());
       push("/");
     });
   };

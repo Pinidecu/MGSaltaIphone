@@ -5,18 +5,20 @@ import NuevosSellados from "../../Componentes/NuevosSellados/NuevosSellados";
 import Cargando from "../../Componentes/Cargando/Cargando";
 import Footer from "../../Componentes/Footer/Footer";
 import { connect } from "react-redux";
-import { getDolar, getIphones, getIphonesUsados } from "../../store/Actions";
+import { getDolar, getIphones, getIphonesUsados, getAccesorios } from "../../store/Actions";
 import { useEffect } from "react";
 import portada1 from "../../Imagenes/portada1.jpg";
 import portada2 from "../../Imagenes/portada2.jpg";
 import portada3 from "../../Imagenes/portada3.jpg";
 import { ContainerCarrousel, ContainerInicio, DolarPrice } from "./styled";
 import Usados from "../../Componentes/Usados/Usados";
+import Accesorios from "../../Componentes/Accesorios/Accesorios";
 
-function Inicio({ iphones,iphonesUsados,getIphonesUsados, getIphones, getDolar, dolarBlue, admin }) {
+function Inicio({ iphones, iphonesUsados, accesorios, getAccesorios, getIphonesUsados, getIphones, getDolar, dolarBlue, admin }) {
   function getIphonesFunction() {
     getIphones();
     getIphonesUsados();
+    getAccesorios();
   }
   function getDolarFunction() {
     getDolar();
@@ -42,6 +44,7 @@ function Inicio({ iphones,iphonesUsados,getIphonesUsados, getIphones, getDolar, 
         <CarrouselPortada imagenes={[portada1, portada2, portada3]} />
       </ContainerCarrousel>
       <Usados iphonesUsados={iphonesUsados} admin={admin} />
+      <Accesorios accesorios={accesorios} admin={admin} />
       <Footer />
     </ContainerInicio>
   );
@@ -51,6 +54,7 @@ const mapStateToProps = (state) => {
   return {
     iphones: state.iphones,
     iphonesUsados: state.iphonesUsados,
+    accesorios: state.accesorios,
     dolarBlue: state.dolarBlue,
   };
 };
@@ -61,6 +65,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getIphonesUsados: (iphonesUsados) => {
       dispatch(getIphonesUsados(iphonesUsados));
+    },
+    getAccesorios: (accesorios) => {
+      dispatch(getAccesorios(accesorios));
     },
     getDolar: (dolarBlue) => {
       dispatch(getDolar(dolarBlue));
