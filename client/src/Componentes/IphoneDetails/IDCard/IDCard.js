@@ -7,7 +7,12 @@ export default function IDCard({ detalle, admin, functions }) {
   const [color, setColor] = useState();
   return (
     <IDCardContainer>
-      <Images detalle={detalle} color={color} />
+      <Images
+        detalle={detalle}
+        color={color}
+        admin={admin}
+        functions={functions}
+      />
       <Info
         setColor={setColor}
         detalle={detalle}

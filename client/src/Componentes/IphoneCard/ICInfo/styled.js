@@ -6,7 +6,7 @@ export const ICInfoContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 1em; 
+  padding: 1em;
 
   h1 {
     font-size: 1em;
@@ -36,18 +36,18 @@ export const ICButton = styled.div`
   border: ${(props) =>
     props.color === "white"
       ? "2px solid var(--border-gray)"
-      : "2px solid var(--deep-black)"};
+      : "2px solid var(--black)"};
 
   color: ${(props) =>
     props.color === "white" ? "var(--font-secondary)" : "var(--font-primary)"};
   background-color: ${(props) =>
-    props.color === "white" ? "var(--white)" : "var(--deep-black)"};
+    props.color === "white" ? "var(--white)" : "var(--black)"};
 
   p {
     font-weight: 600;
   }
   :hover {
-    border: 2px solid var(--deep-black);
+    border: 2px solid var(--black);
     background-color: ${(props) =>
       props.color === "white" ? "var(--background)" : "var(--font-secondary)"};
   }

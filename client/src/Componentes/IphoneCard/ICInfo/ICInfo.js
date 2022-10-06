@@ -22,7 +22,7 @@ export default function ICInfo({ iphone }) {
   };
 
   var urlDetail = `/producto/${iphone.id}`;
-  var urlEdit = `/editarproducto/${iphone.id}`;
+  var urlEdit = `/producto-admin/${iphone.id}`;
 
   return (
     <ICInfoContainer>
