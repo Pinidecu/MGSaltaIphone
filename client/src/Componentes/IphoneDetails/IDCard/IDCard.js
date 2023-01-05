@@ -4,7 +4,7 @@ import Images from "./Images/Images";
 import Info from "./Info/Info";
 
 export default function IDCard({ detalle, admin, functions }) {
-  const [color, setColor] = useState();
+  const [color, setColor] = useState(); 
   return (
     <IDCardContainer>
       <Images detalle={detalle} color={color} />

@@ -1,5 +1,12 @@
 import axios from "axios";
-import { IPHONE_URL, IPHONESUSADOS_URL, DOLAR_URL, DETAIL_URL, COLORS_URL } from "../../constants";
+import {
+  IPHONE_URL,
+  IPHONESUSADOS_URL,
+  DOLAR_URL,
+  DETAIL_URL,
+  COLORS_URL,
+  DETAIL_USADO_URL,
+} from "../../constants";
 export const GET_IPHONES = "GET_IPHONES";
 export const GET_IPHONES_USADOS = "GET_IPHONES_USADOS";
 export const GET_DOLAR = "GET_DOLAR";
@@ -9,7 +16,6 @@ export const CLEAR_DETALLE = "CLEAR_DETALLE";
 export const GET_COLORES = "GET_COLORES";
 export const EDIT_IPHONE_ADD_COLOR = "EDIT_IPHONE_ADD_COLOR";
 export const EDIT_IPHONE_CREATE_COLOR = "EDIT_IPHONE_CREATE_COLOR";
-
 
 export function getIphones() {
   return function (dispatch) {
@@ -46,7 +52,7 @@ export function getDolar() {
 
 export function changeAdmin() {
   return function (dispatch) {
-    return dispatch({ type: CHANGE_ADMIN, payload: true});
+    return dispatch({ type: CHANGE_ADMIN, payload: true });
   };
 }
 
@@ -58,7 +64,15 @@ export function clearDetalle() {
 
 export function getDetalle(id) {
   return (dispatch) => {
-    axios.get(DETAIL_URL+id).then((response) => {
+    axios.get(DETAIL_URL + id).then((response) => {
+      dispatch({ type: GET_DETALLE, payload: response.data });
+    });
+  };
+}
+
+export function getDetalleUsado(id) {
+  return (dispatch) => {
+    axios.get(DETAIL_USADO_URL + id).then((response) => {
       dispatch({ type: GET_DETALLE, payload: response.data });
     });
   };
@@ -74,7 +88,6 @@ export function getColors() {
     });
   };
 }
-
 
 export function editIphoneAddColor(visible) {
   return function (dispatch) {

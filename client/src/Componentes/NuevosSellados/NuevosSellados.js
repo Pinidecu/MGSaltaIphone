@@ -17,6 +17,7 @@ export default function NuevosSellados(props) {
               key={iphone.id}
               colors={iphone.colors}
               admin={props.admin}
+              tipo="nuevo"
             />
           );
         })}

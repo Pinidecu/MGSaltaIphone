@@ -22,7 +22,12 @@ function EditarProducto(props) {
     <div className="flex flex-col min-h-screen justify-between bg-slate-700">
       <NavBar />
 
-      <EditIphone id={id} dolar={dolarBlue} admin ={props.admin}/>
+      <EditIphone
+        id={id}
+        dolar={dolarBlue}
+        admin={props.admin}
+        usado={props.usado}
+      />
       {/* <IphoneDetailsEdit id={id}   edit={true}/> */}
       <Footer />
     </div>

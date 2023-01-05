@@ -9,6 +9,7 @@ import {
   getColors,
   getDetalle,
   getDolar,
+  getDetalleUsado,
 } from "../../store/Actions";
 import {
   CheckOutlined,
@@ -34,7 +35,8 @@ export default function EditIphone(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDetalle(id));
+    props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
+
     dispatch(getColors());
     return () => {
       dispatch(clearDetalle());
@@ -47,7 +49,7 @@ export default function EditIphone(props) {
 
   useEffect(() => {
     getDolarFunction();
-    dispatch(getDetalle(id));
+    props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
   }, [editIphoneAddColorVisible]);
 
   const [input, setInput] = useState({

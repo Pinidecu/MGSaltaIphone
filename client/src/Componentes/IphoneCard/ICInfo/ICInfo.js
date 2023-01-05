@@ -21,8 +21,14 @@ export default function ICInfo({ iphone }) {
     });
   };
 
-  var urlDetail = `/producto/${iphone.id}`;
-  var urlEdit = `/editarproducto/${iphone.id}`;
+  var urlDetail =
+    iphone.tipo === "nuevo"
+      ? `/producto/${iphone.id}`
+      : `/producto-usado/${iphone.id}`;
+  var urlEdit =
+    iphone.tipo === "nuevo"
+      ? `/editarproducto/${iphone.id}`
+      : `/editarproducto-usado/${iphone.id}`;
 
   return (
     <ICInfoContainer>

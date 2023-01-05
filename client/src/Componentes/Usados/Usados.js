@@ -1,7 +1,6 @@
 import IphoneCard from "../IphoneCard/IphoneCard";
 import { NSContainer, ProductsContainer, Title } from "./styled";
 
-
 export default function Usados(props) {
   return (
     <NSContainer>
@@ -17,6 +16,7 @@ export default function Usados(props) {
               key={iphone.id}
               colors={iphone.colors}
               admin={props.admin}
+              tipo="usado"
             />
           );
         })}

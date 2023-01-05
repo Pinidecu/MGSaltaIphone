@@ -8,7 +8,6 @@ export default function NavBar({ admin }) {
   return (
     <NavContainer>
       <Logo href="http://localhost:3000/">
-        <LogoImg src={logo} alt="Logo" />
         <span>MG Salta Iphone</span>
       </Logo>
 

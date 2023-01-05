@@ -15,11 +15,21 @@ function App() {
       <Route exact path="/" element={<Inicio admin={false} />} />
       <Route exact path="/admin" element={<Inicio admin={true} />} />
       <Route exact path="/producto/:id" element={<Producto />} />
-      <Route exact path="/producto-admin/:id" element={<Producto admin={true}/>} />
+      <Route exact path="/producto-usado/:id" element={<Producto usado />} />
+      <Route
+        exact
+        path="/producto-admin/:id"
+        element={<Producto admin={true} />}
+      />
       <Route
         exact
         path="/editarproducto/:id"
         element={<EditarProducto admin={true} />}
+      />
+      <Route
+        exact
+        path="/editarproducto-usado/:id"
+        element={<EditarProducto admin={true} usado />}
       />
       <Route
         exact
@@ -36,7 +46,11 @@ function App() {
         }
       />
       <Route exact path="/nuevoiphone" element={<NuevoIphone />} />
-      <Route exact path="/nuevoiphoneusado" element={<NuevoIphone usado={true} />} />
+      <Route
+        exact
+        path="/nuevoiphoneusado"
+        element={<NuevoIphone usado={true} />}
+      />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

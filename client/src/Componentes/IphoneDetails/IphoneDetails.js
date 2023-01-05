@@ -5,6 +5,7 @@ import {
   clearDetalle,
   getColors,
   getDetalle,
+  getDetalleUsado,
   getDolar,
 } from "../../store/Actions";
 import { IDContainer } from "./styled";
@@ -23,7 +24,7 @@ export default function IphoneDetails(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDetalle(id));
+    props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
     dispatch(getColors());
     return () => {
       dispatch(clearDetalle());
@@ -39,7 +40,7 @@ export default function IphoneDetails(props) {
 
   useEffect(() => {
     getDolarFunction();
-    dispatch(getDetalle(id));
+    props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
   }, [editIphoneAddColorVisible]);
 
   let [more, setMore] = useState(false);
