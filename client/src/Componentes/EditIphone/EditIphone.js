@@ -22,7 +22,6 @@ import axios from "axios";
 import AddColor from "./components/AddColor";
 import Features from "./components/Features/Features";
 import { IDContainer } from "./styled";
-import IDCard from "./components/IDCard/IDCard";
 
 export default function EditIphone(props) {
   const { id } = props;
@@ -294,7 +293,7 @@ export default function EditIphone(props) {
                         })
                       : null}
 
-                    {detalle.image.length === 0 ? (
+                    {detalle?.image?.length === 0 ? (
                       <p className="text-xs text-slate-400">No hay imagenes</p>
                     ) : null}
                   </div>

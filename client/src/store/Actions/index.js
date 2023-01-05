@@ -9,6 +9,7 @@ import {
 } from "../../constants";
 export const GET_IPHONES = "GET_IPHONES";
 export const GET_IPHONES_USADOS = "GET_IPHONES_USADOS";
+export const GET_ACCESORIOS = "GET_ACCESORIOS";
 export const GET_DOLAR = "GET_DOLAR";
 export const CHANGE_ADMIN = "CHANGE_ADMIN";
 export const GET_DETALLE = "GET_DETALLE";
@@ -33,6 +34,17 @@ export function getIphonesUsados() {
     return axios.get(IPHONESUSADOS_URL).then((response) => {
       dispatch({
         type: GET_IPHONES_USADOS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getAccesorios() {
+  return function (dispatch) {
+    return axios.get(ACCESORIOS_URL).then((response) => {
+      dispatch({
+        type: GET_ACCESORIOS,
         payload: response.data,
       });
     });

@@ -12,7 +12,7 @@ import {
   InputContainer,
   ColorsContainer,
   ACButton,
-  NewColorForm, 
+  NewColorForm,
 } from "./styled";
 import { PrimaryButton } from "../styledComponents";
 
@@ -31,7 +31,6 @@ function NuevoIphoneForm({ getColors, colores }) {
   const [input, setInput] = useState({
     nombre: "",
     price: "",
-    imagen: ["iphoneGenerico.webp"],
     image: null,
     colores: [],
     imageForColor: {},
@@ -177,7 +176,7 @@ function NuevoIphoneForm({ getColors, colores }) {
           <div>
             <label for="precio">Precio (U$D)</label>
             <NIInput
-              type="text"
+              type="number"
               id="price"
               name="price"
               placeholder="1500"

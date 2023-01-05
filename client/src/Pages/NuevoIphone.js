@@ -3,6 +3,7 @@ import NavBar from "../Componentes/NavBar/NavBar";
 import NuevoIphoneForm from "../Componentes/NuevoIphoneForm/NuevoIphoneForm";
 import styled from "styled-components";
 import NuevoIphoneUsadoForm from "../Componentes/NuevoIphoneUsadoForm/NuevoIphoneUsadoForm";
+import NuevoAccesorioForm from "../Componentes/NuevoAccesorioForm/NuevoAccesorioForm";
 
 const NuevoIphoneContainer = styled.div`
   display: flex;
@@ -15,11 +16,13 @@ const NuevoIphoneContainer = styled.div`
   background-color: var(--background-gray);
 `;
 
-export function NuevoIphone({usado}) {
+export function NuevoIphone({nuevo, usado, accesorio}) {
   return (
     <NuevoIphoneContainer>
       <NavBar admin={true} />
-      {usado?<NuevoIphoneUsadoForm />:<NuevoIphoneForm />}
+      {nuevo?<NuevoIphoneForm />:null}
+      {usado?<NuevoIphoneUsadoForm />:null}
+      {accesorio?<NuevoAccesorioForm />:null}
       
       <Footer />
 

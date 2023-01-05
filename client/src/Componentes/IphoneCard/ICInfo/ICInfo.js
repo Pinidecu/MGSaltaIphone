@@ -29,6 +29,7 @@ export default function ICInfo({ iphone }) {
     iphone.tipo === "nuevo"
       ? `/editarproducto/${iphone.id}`
       : `/editarproducto-usado/${iphone.id}`;
+  var urlEditPrueba = `/producto-admin/${iphone.id}`;
 
   return (
     <ICInfoContainer>
