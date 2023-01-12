@@ -12,7 +12,7 @@ import {
   InputContainer,
   ColorsContainer,
   ACButton,
-  NewColorForm, 
+  NewColorForm,
 } from "./styled";
 import { PrimaryButton } from "../styledComponents";
 
@@ -32,7 +32,7 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
     nombre: "",
     price: "",
     image: null,
-    color: [],
+    color: null,
     observaciones: "",
     bateria: "",
   });
@@ -55,16 +55,9 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
 
   const handleInputChange = function (e) {
     if (e.target.name === "color") {
-      console.log("Colores", input.color);
-      var array = input.color;
-      if (e.target.checked) {
-        array.push(e.target.value);
-      } else {
-        array = array.filter((d) => d !== e.target.value);
-      }
       setInput({
         ...input,
-        color: array,
+        color: e.target.value,
       });
     } else {
       setInput({
@@ -106,6 +99,7 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
       image: input.image,
       obs: input.observaciones,
       batery: input.bateria,
+      color: input.color,
       colorsNames: input.color,
     };
     console.log("obj: ", obj);
@@ -134,7 +128,7 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
   const colorsTags = colores.map((d) => (
     <div class="flex items-center mb-1 gap-2">
       <input
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"        
+        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"
         type="radio"
         id={d.name}
         key={d.id}
@@ -203,7 +197,9 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
         <InputContainer>
           <label for="bateria">Condición de Batería</label>
           <NIInput
-            type="number" min="0" max="100"
+            type="number"
+            min="0"
+            max="100"
             id="bateria"
             name="bateria"
             placeholder="% de batería"
@@ -256,7 +252,7 @@ function NuevoIphoneUsadoForm({ getColors, colores }) {
             </PrimaryButton>
           </NewColorForm>
         </InputContainer>
-       
+
         <PrimaryButton
           type="submit"
           full={true}
@@ -292,4 +288,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(NuevoIphoneUsadoForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NuevoIphoneUsadoForm);

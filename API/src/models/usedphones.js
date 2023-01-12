@@ -27,5 +27,8 @@ module.exports = function (sequelize) {
     obs: {
       type: DataTypes.STRING,
     },
+    color: {
+      type: DataTypes.STRING,
+    },
   });
 };

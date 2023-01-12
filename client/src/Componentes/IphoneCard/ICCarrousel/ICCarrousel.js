@@ -9,7 +9,13 @@ export default function ICCarrousel({ images, id }) {
       <Carousel infiniteLoop showThumbs={false}>
         {images
           ? images.map((image) => {
-              return <Image cloudName="ezequieldecu26" publicId={image} />;
+              return (
+                <Image
+                  cloudName="ezequieldecu26"
+                  publicId={image}
+                  key={image}
+                />
+              );
             })
           : null}
       </Carousel>

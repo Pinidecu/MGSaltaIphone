@@ -4,7 +4,6 @@ const usedPhoneController = require("../controllers/usedPhones");
 const { Colors, Usedphone } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 
-
 router.get("/", usedPhoneController.getAll);
 
 router.get("/:id", usedPhoneController.getById);
@@ -13,13 +12,14 @@ router.get("/:id", usedPhoneController.getById);
 
 router.post("/", async function (req, res) {
   try {
-    const { name, price, image, obs, batery, colorsNames } = req.body;
+    const { name, price, image, obs, color, batery, colorsNames } = req.body;
     console.log("image: ", image);
     var newIphone = await Usedphone.create({
       name,
       price,
       image,
       obs,
+      color,
       batery,
       id: uuidv4(),
     });

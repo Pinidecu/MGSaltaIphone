@@ -51,7 +51,9 @@ export default function IphoneDetails(props) {
     colores: [],
     imageForColor: {},
     description: "",
-    features: "",
+    obs: "",
+    color: "",
+    features: "", 
   });
 
   const [editInput, setEditInput] = useState({
@@ -62,6 +64,8 @@ export default function IphoneDetails(props) {
     colores: false,
     imageForColor: false,
     description: false,
+    obs: false,
+    color: false,
     features: false,
   });
 
@@ -76,7 +80,7 @@ export default function IphoneDetails(props) {
   }
 
   const handleInputChange = function (e) {
-    if (e.target.name === "colores") { 
+    if (e.target.name === "colores") {
       var array = input.colores;
       if (e.target.checked) {
         array.push(e.target.value);
@@ -92,36 +96,40 @@ export default function IphoneDetails(props) {
         ...input,
         [e.target.name]: e.target.value,
       });
-    } 
+    }
   };
 
-  const edit = function (e, parametro) { 
-    let obj = { [parametro]: input[parametro] }; 
+  const urlBack = props.usado
+    ? "http://localhost:3001/usados/"
+    : "http://localhost:3001/productos/";
+
+  const edit = function (e, parametro) {
+    let obj = { [parametro]: input[parametro] };
     axios
-      .put(`http://localhost:3001/productos/${id}`, obj)
+      .put(`${urlBack}${id}`, obj)
       .then((response) => {
         console.log(response);
-        dispatch(getDetalle(id));
+        props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const borrarColor = function (color) { 
+  const borrarColor = function (color) {
     let newColors = detalle.colors.filter((c) => c.name !== color);
     let colores = [];
     newColors.forEach((c) => {
       colores.push(c.name);
-    }); 
+    });
     let newImageForColors = detalle.imageForColor;
-    delete newImageForColors[color]; 
+    delete newImageForColors[color];
     let obj = { colores: colores, imageForColor: newImageForColors };
     axios
-      .put(`http://localhost:3001/productos/colores/${id}`, obj)
+      .put(`${urlBack}colores/${id}`, obj)
       .then((response) => {
         console.log(response);
-        dispatch(getDetalle(id));
+        props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
       })
       .catch((error) => {
         console.log(error);
@@ -129,29 +137,31 @@ export default function IphoneDetails(props) {
   };
 
   const borrarImagen = function (imagen) {
-    let array = image.borrar; 
-    array.push(imagen); 
-    setImage({ ...image, borrar: array }); 
+    let array = image.borrar;
+    array.push(imagen);
+    setImage({ ...image, borrar: array });
   };
 
   const cancelarBorrado = function (imagen) {
-    let array = image.borrar; 
+    let array = image.borrar;
     array = array.filter((i) => i !== imagen);
     setImage({ ...image, borrar: array });
   };
 
-  const guardarcambios = function (e) { 
+  const guardarcambios = function (e) {
     setEditInput({ ...editInput, image: false });
-    let newImage = detalle.image ? detalle.image.concat(image.nuevas) : image.nuevas;
+    let newImage = detalle.image
+      ? detalle.image.concat(image.nuevas)
+      : image.nuevas;
     image.borrar.forEach((imagen) => {
       newImage = newImage.filter((i) => i !== imagen);
-    }); 
+    });
     let obj = { image: newImage };
     axios
-      .put(`http://localhost:3001/productos/${id}`, obj)
+      .put(`${urlBack}${id}`, obj)
       .then((response) => {
         console.log(response);
-        dispatch(getDetalle(id));
+        props.usado ? dispatch(getDetalleUsado(id)) : dispatch(getDetalle(id));
         setImage({ borrar: [], nuevas: [] });
       })
       .catch((error) => {
@@ -175,10 +185,15 @@ export default function IphoneDetails(props) {
     image,
     setImage,
   };
- 
+
   return (
     <IDContainer>
-      <IDCard detalle={detalle} functions={functions} admin={props.admin} />
+      <IDCard
+        detalle={detalle}
+        functions={functions}
+        admin={props.admin}
+        usado={props.usado}
+      />
       {detalle.features ? (
         <Features detalle={detalle} functions={functions} admin={props.admin} />
       ) : null}

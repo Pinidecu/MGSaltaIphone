@@ -6,6 +6,7 @@ import {
   DETAIL_URL,
   COLORS_URL,
   DETAIL_USADO_URL,
+  ACCESORIOS_URL,
 } from "../../constants";
 export const GET_IPHONES = "GET_IPHONES";
 export const GET_IPHONES_USADOS = "GET_IPHONES_USADOS";

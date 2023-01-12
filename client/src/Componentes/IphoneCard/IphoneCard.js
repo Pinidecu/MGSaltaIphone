@@ -6,7 +6,7 @@ export default function IphoneCard(props) {
   return (
     <ICContainer>
       <ICCarrousel images={props.images} id={props.id} />
-      <ICInfo iphone={props} />
+      <ICInfo iphone={props} tipo={props.tipo} />
     </ICContainer>
   );
 }

@@ -44,7 +44,7 @@ function Inicio({ iphones, iphonesUsados, accesorios, getAccesorios, getIphonesU
         <CarrouselPortada imagenes={[portada1, portada2, portada3]} />
       </ContainerCarrousel>
       <Usados iphonesUsados={iphonesUsados} admin={admin} />
-      <Accesorios accesorios={accesorios} admin={admin} />
+      {/* <Accesorios accesorios={accesorios} admin={admin} /> */}
       <Footer />
     </ContainerInicio>
   );

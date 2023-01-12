@@ -3,8 +3,8 @@ import { IDCardContainer } from "./styled";
 import Images from "./Images/Images";
 import Info from "./Info/Info";
 
-export default function IDCard({ detalle, admin, functions }) {
-  const [color, setColor] = useState(); 
+export default function IDCard({ detalle, admin, functions, usado }) {
+  const [color, setColor] = useState();
   return (
     <IDCardContainer>
       <Images
@@ -18,6 +18,7 @@ export default function IDCard({ detalle, admin, functions }) {
         detalle={detalle}
         admin={admin}
         functions={functions}
+        usado={usado}
       />
     </IDCardContainer>
   );
